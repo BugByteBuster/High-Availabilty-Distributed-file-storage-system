@@ -1,0 +1,32 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.js"></script>
+  <script type="text/javascript">
+      window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer", {
+              data: [
+              {
+                  type: "pie",
+                  theme: "theme2",
+                  showInLegend: true,
+                  legendText: "{label}",
+                  dataPoints: [
+                  {  y: 10 , label: 'ab' },
+                  {  y: 15 , label: 'ac' },
+                  {  y: 25 , label: 'ad' },
+                  {  y: 30 , label: 'ae' },
+                  {  y: 28 , label: 'af' }
+                  ]
+              }
+              ]
+          });
+ 
+          chart.render();
+      }
+  </script>
+</head>
+ 
+<body>
+  <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+</body>
+</html>
