@@ -1,0 +1,42 @@
+import pymysql
+db=pymysql.connect("127.0.0.1","root","1234","PROJECT")
+cursor=db.cursor()
+#connecting database
+cursor.execute("SELECT VERSION()")
+data=cursor.fetchone()
+print("Database version : %s" %data)
+#creating Table
+cursor.execute("DROP TABLE IF EXISTS User")
+sql="""CREATE TABLE User(id INT NOT NULL ,User_name CHAR(20),email CHAR(20),Password CHAR(20),confirm_password CHAR(20))"""
+cursor.execute(sql)
+cursor.execute("DROP TABLE IF EXISTS Asset")
+sql="""CREATE TABLE Asset(file_id INT NOT NULL ,user_id INT, file_name CHAR(20),file_size FLOAT ,date_created DATE ,date_modified DATE ,message_digest CHAR(20))"""
+cursor.execute(sql)
+#Inserting data into tables
+sql="""INSERT INTO User(id, User_name, email, Password, confirm_password)VALUES ('x','BANDARI','bandari@gmail.com','werty','wertu')"""
+try:
+    cursor.execute(sql)
+    db.commit()
+except:
+    db.rollback()
+#Getting row data from table
+sql="SELECT * FROM User WHERE id = 'x'"
+try:
+    cursor.execute(sql)
+    results=cursor.fetchall()
+except:
+    print ("error")
+#updating the table
+sql="UPDATE User SET User_name='SWAMY' WHERE id='x'"
+try:
+    cursor.execute(sql)
+    db.commit()
+except:
+    db.rollback()
+sql="DELETE FROM User WHERE User_name='SWAMY'"
+try:
+    cursor.execute(sql)
+    db.commit()
+except:
+    db.rollback()
+db.close()    
